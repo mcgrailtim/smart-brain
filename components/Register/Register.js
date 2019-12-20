@@ -38,8 +38,35 @@ class Register extends React.Component {
 				this.props.loadUser(user)
 				this.props.onRouteChange('home');
 			}
+			else{
+		        	alert("All fields are required.")
+		        }
 		})
 	}
+
+		handleKeyPress = (event) => {
+		if(event.charCode === 13) {
+			fetch('https://evening-dawn-04162.herokuapp.com/register', {
+				method: 'post',
+				headers: {'Content-Type': 'application/json'},
+				body: JSON.stringify({
+					email: this.state.email,
+					password: this.state.password,
+					name: this.state.name,
+				})
+			})
+			.then(response => response.json())
+			.then(user => {
+			if (user.id) {
+				this.props.loadUser(user)
+				this.props.onRouteChange('home');
+			}
+			else{
+		        	alert("All fields are required.")
+		        }
+		})
+	}
+}
 
 	render() {
 		return (
@@ -51,31 +78,34 @@ class Register extends React.Component {
 				      <div className="mt3">
 				        <label className="db fw6 lh-copy f6" htmlFor="name">Name</label>
 				        <input 
-				        className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-				        type="text" 
-				        name="name"  
-				        id="name" 
-				        onChange={this.onNameChange}
+					        onKeyPress={this.handleKeyPress}
+					        className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+					        type="text" 
+					        name="name"  
+					        id="name" 
+					        onChange={this.onNameChange}
 				        />
 				      </div>
 				      <div className="mt3">
 				        <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
 				        <input 
-				        className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-				        type="email" 
-				        name="email-address"  
-				        id="email-address"
-				        onChange={this.onEmailChange}
+					        onKeyPress={this.handleKeyPress}
+					        className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+					        type="email" 
+					        name="email-address"  
+					        id="email-address"
+					        onChange={this.onEmailChange}
 				        />
 				      </div>
 				      <div className="mv3">
 				        <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
 				        <input 
-				        className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-				        type="password" 
-				        name="password"  
-				        id="password" 
-				        onChange={this.onPasswordChange}
+					        onKeyPress={this.handleKeyPress}
+					        className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+					        type="password" 
+					        name="password"  
+					        id="password" 
+					        onChange={this.onPasswordChange}
 				        />
 				      </div>
 				    </fieldset>

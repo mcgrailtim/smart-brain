@@ -32,25 +32,33 @@ class SignIn extends React.Component {
 	          this.props.loadUser(user);
 	          this.props.onRouteChange('home');
 	        }
+	        else{
+		        	alert("Wrong email or password! Please try again.")
+		        }
 	      })
 	} 
 
 	handleKeyPress = (event) => {
-		fetch('https://evening-dawn-04162.herokuapp.com/signin', {
-			method: 'post',
-			headers: {'Content-Type': 'application/json'},
-			body: JSON.stringify({
-				email: this.state.signInEmail,
-				password: this.state.signInPassword,
+		if(event.charCode === 13) {
+			fetch('https://evening-dawn-04162.herokuapp.com/signin', {
+				method: 'post',
+				headers: {'Content-Type': 'application/json'},
+				body: JSON.stringify({
+					email: this.state.signInEmail,
+					password: this.state.signInPassword,
+				})
 			})
-		})
-	     .then(response => response.json())
-	      .then(user => {
-	        if(user.id){
-	          this.props.loadUser(user);
-	          this.props.onRouteChange('home');
-	        }
-	      })
+		     .then(response => response.json())
+		      .then(user => {
+		        if(user.id){
+		          this.props.loadUser(user);
+		          this.props.onRouteChange('home');
+		        }
+		        else{
+		        	alert("Wrong email or password! Please try again.")
+		        }
+		      })
+		  }
 	}
 
 	
