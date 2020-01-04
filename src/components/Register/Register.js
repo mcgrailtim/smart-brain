@@ -1,20 +1,5 @@
 import React from 'react';
 
-const initialState = {
-  input: '',
-  imageUrl: '',
-  box: {},
-  route: 'signin',
-  isSignedIn: false,
-  user: {
-    id: '',
-    name: '',
-    email: '',
-    entries: 0,
-    joined: '',
-    }
-}
-
 class Register extends React.Component {
 	constructor(props) {
 		super(props);

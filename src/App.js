@@ -51,6 +51,8 @@ class App extends Component {
     }})
   }
 
+  // made some edits here
+
   calculateFaceLocation = (data) => {
     const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('inputimage');
@@ -72,36 +74,7 @@ class App extends Component {
     this.setState({input: event.target.value});
   }
 
-  onButtonSubmit = () => {
-    this.setState({imageUrl: this.state.input});
-      fetch('https://evening-dawn-04162.herokuapp.com/imageurl', {
-        method: 'post',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          input: this.state.input
-        })
-      })
-      .then(response => response.json())
-      .then(response => {
-        if (response) {
-          fetch('https://evening-dawn-04162.herokuapp.com/image', {
-            method: 'put',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-              id: this.state.user.id
-            })
-          })
-          .then(response => response.json())
-          .then(count => {
-            this.setState(Object.assign(this.state.user, { entries: count }))
-            })
-            .catch(console.log);
 
-        }
-        this.displayFaceBox(this.calculateFaceLocation(response))
-    })
-      .catch(err => console.log(err));
-  }
 
   handleKeyPress = (event) => {
     console.log("typing stuff")
